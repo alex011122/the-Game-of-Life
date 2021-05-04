@@ -6,6 +6,11 @@
 
 int findSize(FILE *file, int *plength, int *pwidth)
 {
+    if ((file == NULL) || (plength == NULL) || (pwidth == NULL))
+    {
+        //printf("wrong input\n");
+        return -1;
+    }
     int judge = 0;
     *plength = 0;
     *pwidth = 0;
@@ -30,8 +35,14 @@ int findSize(FILE *file, int *plength, int *pwidth)
     }
     return 0;
 }
-int **createArray(int *plength, int *pwidth)
+int **createArray(const int *plength,const int *pwidth)
 {
+    if ((plength == NULL) || (pwidth) == NULL)
+    {
+        //printf("invalid input\n");
+        int**pp=NULL;
+        return pp;
+    }
     int **pp = (int **)malloc(sizeof(int *) * (*pwidth));
     for (int i = 0; i < (*pwidth); i++)
     {
@@ -47,8 +58,13 @@ int **createArray(int *plength, int *pwidth)
 
     return pp;
 }
-int readArray(FILE *file, int **istate, int *plength, int *pwidth)
+int readArray(FILE *file, int **istate,const int *plength, const int *pwidth)
 {
+    if ((file == NULL) || (istate == NULL) || (plength == NULL) || (pwidth == NULL))
+    {
+        //printf("wrong input\n");
+        return -1;
+    }
     char buf[MAX_LINE];
     int row = 0;
     int col = 0;
@@ -65,8 +81,13 @@ int readArray(FILE *file, int **istate, int *plength, int *pwidth)
     }
     return 0;
 }
-int storeArray(FILE *file, int **istate, int *plength, int *pwidth)
+int storeArray(FILE *file, int **istate,const int *plength, const int *pwidth)
 {
+    if ((file == NULL) || (istate == NULL) || (plength == NULL) || (pwidth == NULL))
+    {
+        //printf("wrong input\n");
+        return -1;
+    }
     char buf[MAX_LINE];
     int len;
     memset(buf, 0, sizeof(buf));
@@ -76,10 +97,11 @@ int storeArray(FILE *file, int **istate, int *plength, int *pwidth)
         {
             buf[j] = istate[i][j] + '0';
         }
-        if(i<((*pwidth)-1)){
-            buf[(*plength)]='\n';
+        if (i < ((*pwidth) - 1))
+        {
+            buf[(*plength)] = '\n';
         }
-        fputs(buf,file);
+        fputs(buf, file);
     }
     return 0;
 }

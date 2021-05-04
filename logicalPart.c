@@ -2,8 +2,12 @@
 #include <stdlib.h>
 #include "logicalPart.h"
 #include "fileReadStore.h"
-int NextState(int *pwidth, int *plength, int **istate)
+int NextState(const int *pwidth, const int *plength, int **istate)
 {
+    if((pwidth==NULL)||(plength==NULL)||(istate==NULL)){
+        //printf("wrong input\n");
+        return -1;
+    }
     int **newstate;
     newstate = createArray(plength, pwidth);
     int count = 0;
